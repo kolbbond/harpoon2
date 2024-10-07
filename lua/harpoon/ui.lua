@@ -98,7 +98,7 @@ function HarpoonUI:_create_window(toggle_opts)
     local bufnr = vim.api.nvim_create_buf(false, true)
     local win_id = vim.api.nvim_open_win(bufnr, true, {
         relative = "editor",
-        title = toggle_opts.title or "Harpoon",
+        title = toggle_opts.title or "Harpoon2",
         title_pos = toggle_opts.title_pos or "left",
         row = math.floor(((vim.o.lines - height) / 2) - 1),
         col = math.floor((vim.o.columns - width) / 2),
@@ -120,7 +120,8 @@ function HarpoonUI:_create_window(toggle_opts)
     Buffer.setup_autocmds_and_keymaps(bufnr)
 
     self.win_id = win_id
-    vim.api.nvim_set_option_value("number", true, {
+    -- @hey, add option for relative numbers in harpoon list
+    vim.api.nvim_set_option_value("relativenumber", true, {
         win = win_id,
     })
 
@@ -162,7 +163,7 @@ end
 
 function HarpoonUI:_get_processed_ui_contents()
     local list = Buffer.get_contents(self.bufnr)
-    local length = #list
+    local length = (#list)
     return list, length
 end
 
